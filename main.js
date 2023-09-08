@@ -1,9 +1,11 @@
 let pokemon
+let pokemonCopia
 
 fetch("pokemon.json-master/pokedex.json")
   .then(response => response.json())
   .then(data => {
     pokemon = data.slice(0, 151);
+
     console.log(pokemon);
     generaCards(pokemon);
   })
@@ -11,15 +13,18 @@ fetch("pokemon.json-master/pokedex.json")
 
 function generaCards(lista){
      let pokedex = document.getElementById("pokedex")
+     while(pokedex.firstChild){
+      pokedex.removeChild(pokedex.firstChild)
+     }
+
     
     lista.forEach(pokemon=>{
         let colonna = document.createElement("div")
-        colonna.className = "col-12 col-md-3 p-3"
+        colonna.className = "col-12 col-md-4 col-lg-3 p-3"
         pokedex.appendChild(colonna)
         
         let card = document.createElement("div")
-        card.setAttribute("style", "width: 18rem")
-        card.className = "card rounded-3 shadow"
+        card.className = "card rounded-3"
         colonna.appendChild(card)
 
         let img = document.createElement("img")
@@ -35,11 +40,15 @@ function generaCards(lista){
         nomePokemon.className = "card-title text-center py-3"
         nomePokemon.appendChild(document.createTextNode(pokemon.name.english))
         body.appendChild(nomePokemon)
+        
+        let hr = document.createElement("hr")
+        body.appendChild(hr)
 
         let type = document.createElement("p")
-        type.className = "card-text"
+        type.className = "card-text text-end"
         type.appendChild(document.createTextNode("Tipo: " + pokemon.type.join(", ")))
         body.appendChild(type)
+
 
         let attack = document.createElement("p")
         attack.className ="text-end"
@@ -61,6 +70,28 @@ function generaCards(lista){
 
 
       } 
+
+      let search = document.getElementById("search")
+
+      search.addEventListener("keyup", (e)=>{
+        let pokemonCopia = []
+
+        if(e.target.value){
+          let reg = new RegExp(`^${e.target.value}`, "i")
+          pokemonCopia = pokemon.filter(poke =>{
+            return reg.test(poke.type)
+          })
+          console.log("cerco per tipo");
+        } else {
+          let reg = new RegExp(`^${e.target.value}`, "i")
+          pokemonCopia = pokemon.filter(poke =>{
+            return reg.test(poke.name.english)
+          }) 
+        }
+        generaCards(pokemonCopia)
+        });
+
+
         
 
         

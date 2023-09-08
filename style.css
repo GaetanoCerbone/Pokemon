@@ -1,0 +1,23 @@
+body{
+    background-color: beige;
+}
+.pokemon{
+    background-image: url("https://th.bing.com/th/id/R.2129c39cce4a3f117aa3d6e3558cfc1e?rik=UFPbJ0RCty0g1w&riu=http%3a%2f%2fwww.gamekings.tv%2fwp-content%2fuploads%2fnieuws20160316_pokemon.jpg&ehk=S5JVcl%2f8GYiEmxVaiOgMhzTcgEp9soMlzLqVdj0nMO8%3d&risl=&pid=ImgRaw&r=0");
+    height: 400px; 
+    background-size: cover;
+    background-position: center;
+}
+.row{
+    width: 100%;
+}
+#search{ 
+    background-color: rgba(245, 245, 245, 0.765);
+    border-radius: 15px 15px 15px 15px;
+
+}
+.info{
+    
+    
+    background-color: beige;
+    
+}
